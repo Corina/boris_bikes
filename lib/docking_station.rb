@@ -11,7 +11,16 @@ class DockingStation
 
   def release_bike
     raise "No bikes available" if empty?
-    @bikes.pop
+    bike = nil
+    @bikes.each_with_index do |x, index|
+      if x.working?
+        bike = x
+        bikes.delete_at(index)
+        break
+      end
+    end
+    raise "No working bikes available" if bike == nil
+    bike
   end
 
 
@@ -21,7 +30,6 @@ class DockingStation
   end
 
 private
-
   def full?
     @bikes.count >= capacity
   end
