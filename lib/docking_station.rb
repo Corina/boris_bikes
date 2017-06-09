@@ -11,16 +11,16 @@ class DockingStation
 
   def release_bike
     raise "No bikes available" if empty?
-    bike = nil
+    working_bike = nil
     @bikes.each_with_index do |x, index|
       if x.working?
-        bike = x
+        working_bike = x
         bikes.delete_at(index)
         break
       end
     end
-    raise "No working bikes available" if bike == nil
-    bike
+    raise "No working bikes available" if working_bike == nil
+    working_bike
   end
 
 
